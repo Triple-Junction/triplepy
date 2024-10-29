@@ -1,0 +1,134 @@
+{
+    "create_date": "2024-04-05",
+    "proj_name": "example_micress_simulation",
+    "proj_dir_path": "/network/datamic/home/beiz/benchmark/benchmark_triple_junction_share/example_micress_simulation",
+    "basename": "tripleBench",
+    "j2_file_path": "/network/datamic/home/beiz/.conda/envs/benchmark/lib/python3.11/site-packages/bengbmark_micress/J2_DRIFILES/tripleBench.dri.j2",
+    "variable_with_default": {
+        "num_x": 100,
+        "num_z": 855,
+        "delta_x": 0.5,
+        "gb_energy_horizontal": 0.0005,
+        "gb_mobility": 0.002,
+        "gb_energy_vertical": 0.0005,
+        "grain.length_x": null,
+        "grain.length_z": null,
+        "num_x*delta_x": null,
+        "1000.0 - driving_force": null,
+        "output.increment": 6.5,
+        "output.runtime": 125.0,
+        "fd_option": "fd_correction",
+        "n_cells_interface": 8.0,
+        "num_threads": 1
+    },
+    "variation_settings": [
+        {
+            "num_x": [
+                100
+            ],
+            "option": "cartesian"
+        },
+        {
+            "num_z": [
+                1770
+            ],
+            "option": "cartesian"
+        },
+        {
+            "delta_x": [
+                0.5
+            ],
+            "option": "cartesian"
+        },
+        {
+            "gb_energy_horizontal": [
+                5e-05
+            ],
+            "option": "cartesian"
+        },
+        {
+            "gb_mobility": [
+                2.0
+            ],
+            "option": "cartesian"
+        },
+        {
+            "gb_energy_vertical": [
+                5e-05
+            ],
+            "option": "cartesian"
+        },
+        {
+            "grain.length_x": [
+                51.0
+            ],
+            "option": "cartesian"
+        },
+        {
+            "grain.length_z": [
+                1740.0
+            ],
+            "option": "cartesian"
+        },
+        {
+            "driving_force": [
+                -0.1
+            ],
+            "option": "cartesian"
+        },
+        {
+            "output.increment": [
+                0.00625
+            ],
+            "option": "cartesian"
+        },
+        {
+            "output.runtime": [
+                0.25
+            ],
+            "option": "cartesian"
+        },
+        {
+            "n_cells_interface": [
+                8.0
+            ],
+            "option": "cartesian"
+        },
+        {
+            "num_threads": [
+                2
+            ],
+            "option": "cartesian"
+        },
+        {
+            "fd_option": [
+                "fd_correction"
+            ],
+            "option": "cartesian"
+        }
+    ],
+    "variations": [
+        {
+            "index": 0,
+            "num_x": 100,
+            "num_z": 1770,
+            "delta_x": 0.5,
+            "gb_energy_horizontal": 5e-05,
+            "gb_mobility": 2.0,
+            "gb_energy_vertical": 5e-05,
+            "grain": {
+                "length_x": 51.0,
+                "length_z": 1740.0
+            },
+            "driving_force": -0.1,
+            "output": {
+                "increment": 0.00625,
+                "runtime": 0.25
+            },
+            "n_cells_interface": 8.0,
+            "num_threads": 2,
+            "fd_option": "fd_correction",
+            "result_path": "Results/tripleBench_0"
+        }
+    ]
+}

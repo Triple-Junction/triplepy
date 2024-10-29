@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "triplepy"
+version = "1.0.0"
+authors = [
+  { name="Paul Hoffrogge", email="mail@paul-hoffrogge.de" },
+  { name="Simon Daubner", email="simon.daubner@kit.edu" },
+  { name="Bei Zhou", email="b.zhou@access-technology.de" }
+]
+description = "A benchmark for GB migration subject to capillary and bulk driving forces."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = ["numpy", "scipy", "scikit-image", "vtk", "pint", "mip"]
+
+[project.urls]
+Homepage = "https://github.com/Triple-Junction/triplepy"
+Issues = "https://github.com/Triple-Junction/triplepy/issues"

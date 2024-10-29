@@ -1,0 +1,13 @@
+{
+    "gb_mobility": "2e-08 m ** 4 / J / s",
+    "gb_energy_horizontal": "0.5 J / m ** 2",
+    "gb_energy_vertical": "0.5 J / m ** 2",
+    "driving_force": "-100000 J / m ** 3",
+    "width": "5e-05 m",
+    "horizontal_resolution": 100,
+    "n_cells_interface": 8.0,
+    "time_unit": "1 s",
+    "length_unit": "1e-06 m",
+    "p": -10.0,
+    "p_pf": -0.8
+}

@@ -1,0 +1,680 @@
+
+# MICRESS binary
+# ==============
+# path: /network/datamic/home/beiz/benchmark/benchmark_triple_junction_share/example_micress_simulation/MICRESS_par_noTQ.exe
+# version number: 7.251 (Linux)
+# compiled: 02/20/2024
+# compiler version: Intel 1600 20160811
+# executable architecture: x64
+# Thermo-Calc coupling: disabled
+# OpenMP: enabled
+# shell: /bin/tcsh
+# ('double precision' binary)
+#
+#
+# Language
+# ========
+# Please select a language: 'English', 'Deutsch' or 'Francais'
+English
+#
+#
+# Output Location
+# ===============
+# Options: [ <directory path>/ ] <base name>
+# The default result directory is the driving file location.
+Results/tripleBench_0
+# Overwrite files with the same name?
+# Options:    overwrite      write_protected     append
+#             [zipped|not_zipped|vtk]
+#             [unix|windows|non_native]
+overwrite vtk
+# VTK output file format options?
+# Options:  binary_unzip  binary_zip  ascii
+binary_unzip
+#
+#
+# Restart
+# =======
+# Restart using old results?
+# Options:    new       restart [reset_time | with_flow]
+new
+#
+#
+# Geometry
+# ========
+# Grid size?
+# (for 2D calculations: CellsY=1, for 1D calculations: CellsX=1, CellsY=1)
+# Cells in X-direction (CellsX):
+100
+# Cells in Y-direction (CellsY):
+1
+# Cells in Z-direction (CellsZ):
+1770
+# Cell dimension (grid spacing in micrometers):
+# (optionally followed by rescaling factor for the output in the form of '3/4')
+0.5
+#
+#
+# Model
+# =====
+# Type of coupling?
+# Options:  phase  concentration [volume_change] temperature  temp_cyl_coord
+#    [stress] [flow] [flow_coarse] [dislocation]
+phase
+#
+#
+# Boundary Conditions
+# ===================
+# Boundary conditions for phase field in each direction
+# Options: i (insulation) s (symmetric) p (periodic/wrap-around)
+#          a (auto-periodic)  g (gradient)   f (fixed)     w (wetting)
+# Sequence: W E B T
+#   (X: West-East, Y:South-North, Z:Bottom-Top)
+iiii
+
+# License check ...
+
+#
+#
+# Phases
+# ======
+#
+# Selection of Phases
+# -------------------
+#
+# Phases can be added by user defined names.
+# Options:
+# <user defined name> [<alias>]
+# 'end_of_phases' will finish the phase data input.
+#
+# Phase 0 (matrix phase)
+phase_0
+# Phase 1
+phase_1
+# Phase 2
+phase_2
+# Phase 3
+end_of_phases
+#
+# MICRESS phase indexing
+# 0 -> PHASE_0 (user), alias = PHASE_0
+# 1 -> PHASE_1 (user), alias = PHASE_1
+# 2 -> PHASE_2 (user), alias = PHASE_2
+#
+# Input/Output Format for Orientations
+# ------------------------------------
+# How shall grain orientations be defined?
+# Options:  angle_2d  euler_zxz  angle_axis  miller_indices  quaternion
+angle_2d
+#
+#
+# Phase Properties
+# ----------------
+#
+# Phase 0 ( PHASE_0 )
+# -------------------
+#
+# Phase 1 ( PHASE_1 )
+# -------------------
+# Simulation of recrystallisation in phase  1 (PHASE_1) ?
+# Options:   recrystall     no_recrystall   [verbose|no_verbose]
+no_recrystall
+# Is phase  1 (PHASE_1) anisotropic ?
+# Optionen: isotropic  anisotropic  faceted_a  faceted_b   faceted[_c]  antifaceted
+isotropic
+# Should grains of phase  1 (PHASE_1) be reduced to categories?
+# Options:   categorize no_categorize
+no_categorize
+#
+# Phase 2 ( PHASE_2 )
+# -------------------
+# [identical phase number]
+# Simulation of recrystallisation in phase  2 (PHASE_2) ?
+# Options:   recrystall     no_recrystall   [verbose|no_verbose]
+no_recrystall
+# Is phase  2 (PHASE_2) anisotropic ?
+# Optionen: isotropic  anisotropic  faceted_a  faceted_b   faceted[_c]  antifaceted
+isotropic
+# Should grains of phase  2 (PHASE_2) be reduced to categories?
+# Options:   categorize no_categorize
+no_categorize
+#
+#
+#
+# Phase Interactions
+# ==================
+# Start legacy mode by entering keyword 'phase_interaction' or 'no_phase_interaction'.
+# Start terse mode with 2 phase IDs and keyword 'phase_interaction' in one line.
+# Finish terse mode input with 'end_phase_interactions'.
+#
+# 0 (PHASE_0)  /  1 (PHASE_1)
+# ---------------------------
+# Simulation of interaction between 0 (PHASE_0) and 1 (PHASE_1)?
+# Options:
+#  phase_interaction
+#    [ standard | particle_pinning[_temperature] | solute_drag ]
+#    [ no_junction_force ]
+#  | no_phase_interaction
+#    [ junction_force ]
+#    [ phase_diagram ]
+phase_interaction
+# Type of interfacial energy definition between 0 (PHASE_0) and  1 (PHASE_1) ?
+# Options:  constant  temp_dependent
+constant
+# Interfacial energy between 0 (PHASE_0) and  1 (PHASE_1) ? [J/cm**2]
+#     [max. value for num. interface stabilisation [J/cm**2]]
+5e-05
+# Type of mobility definition between PHASE_0 and PHASE_1?
+# Options: constant temp_dependent dg_dependent [fixed_minimum]
+constant
+# Kinetic coefficient mu between PHASE_0 and PHASE_1 [cm**4/(Js)] ?
+2.0
+# Equilibrium temperature between PHASE_0 and PHASE_1 ? [K]
+1000.000000000  
+# Entropy of fusion between PHASE_0 and PHASE_1 ? [J/(cm**3 K)]
+1.000000000000  
+#
+# 0 (PHASE_0)  /  2 (PHASE_2)
+# ---------------------------
+# Simulation of interaction between 0 (PHASE_0) and 2 (PHASE_2)?
+# Options:
+#  phase_interaction
+#    [ standard | particle_pinning[_temperature] | solute_drag ]
+#    [ no_junction_force ]
+#  | no_phase_interaction
+#    [ junction_force ]
+#    [ phase_diagram ]
+#  | identical <phase1> <phase2>
+phase_interaction
+# Type of interfacial energy definition between 0 (PHASE_0) and  2 (PHASE_2) ?
+# Options:  constant  temp_dependent
+constant
+# Interfacial energy between 0 (PHASE_0) and  2 (PHASE_2) ? [J/cm**2]
+#     [max. value for num. interface stabilisation [J/cm**2]]
+5e-05
+# Type of mobility definition between PHASE_0 and PHASE_2?
+# Options: constant temp_dependent dg_dependent [fixed_minimum]
+constant
+# Kinetic coefficient mu between PHASE_0 and PHASE_2 [cm**4/(Js)] ?
+2.0
+# Equilibrium temperature between PHASE_0 and PHASE_2 ? [K]
+1000.000000000  
+# Entropy of fusion between PHASE_0 and PHASE_2 ? [J/(cm**3 K)]
+1.000000000000  
+#
+# 1 (PHASE_1)  /  1 (PHASE_1)
+# ---------------------------
+# Simulation of interaction between 1 (PHASE_1) and 1 (PHASE_1)?
+# Options:
+#  phase_interaction
+#    [ standard | particle_pinning[_temperature] | solute_drag ]
+#    [ no_junction_force ]
+#  | no_phase_interaction
+#    [ junction_force ]
+#  | identical <phase1> <phase2>
+no_phase_interaction
+#
+# 1 (PHASE_1)  /  2 (PHASE_2)
+# ---------------------------
+# Simulation of interaction between 1 (PHASE_1) and 2 (PHASE_2)?
+# Options:
+#  phase_interaction
+#    [ standard | particle_pinning[_temperature] | solute_drag ]
+#    [ no_junction_force ]
+#  | no_phase_interaction
+#    [ junction_force ]
+#    [ phase_diagram ]
+#  | identical <phase1> <phase2>
+phase_interaction
+# Type of interfacial energy definition between 1 (PHASE_1) and  2 (PHASE_2) ?
+# Options:  constant  temp_dependent
+constant
+# Interfacial energy between 1 (PHASE_1) and  2 (PHASE_2) ? [J/cm**2]
+#     [max. value for num. interface stabilisation [J/cm**2]]
+5e-05
+# Type of mobility definition between PHASE_1 and PHASE_2?
+# Options: constant temp_dependent dg_dependent [fixed_minimum]
+constant
+# Kinetic coefficient mu between PHASE_1 and PHASE_2 [cm**4/(Js)] ?
+2.0
+# Equilibrium temperature between PHASE_1 and PHASE_2 ? [K]
+1000.000000000  
+# Entropy of fusion between PHASE_1 and PHASE_2 ? [J/(cm**3 K)]
+0.000000000000  
+#
+# 2 (PHASE_2)  /  2 (PHASE_2)
+# ---------------------------
+# Simulation of interaction between 2 (PHASE_2) and 2 (PHASE_2)?
+# Options:
+#  phase_interaction
+#    [ standard | particle_pinning[_temperature] | solute_drag ]
+#    [ no_junction_force ]
+#  | no_phase_interaction
+#    [ junction_force ]
+#  | identical <phase1> <phase2>
+no_phase_interaction
+#
+# Initial Microstructure
+# ======================
+# Type of grain positioning?
+# Options:  deterministic   random [deterministic_infile]   from_file
+deterministic
+# NB: the origin of coordinate system is the bottom left-hand corner,
+#     all points within the simulation domain having positive coordinates.
+# Number of grains at the beginning?
+2           
+#
+# Grain number 1
+# --------------
+# Geometry?
+# Options:  round  rectangular  elliptic  round_inverse
+rectangular
+# Center x,z coordinates [micrometers], grain number 1?
+0.000000000000  
+0.000000000000  
+# Length along x-axis [micrometers]
+51.00000000000  
+# Length along z-axis [micrometers]
+1740.000000000  
+# Should the Voronoi criterion be applied?
+# Options:    voronoi     no_voronoi
+voronoi
+# Phase number?  [grain group]  (integer)
+1
+#
+# Grain number 2
+# --------------
+# Geometry?
+# Options:  round  rectangular  elliptic  round_inverse
+rectangular
+# Center x,z coordinates [micrometers], grain number 2?
+50.00000000000  
+0.000000000000  
+# Length along x-axis [micrometers]
+51.00000000000  
+# Length along z-axis [micrometers]
+1740.000000000  
+# Should the Voronoi criterion be applied?
+# Options:    voronoi     no_voronoi
+voronoi
+# Phase number?  [grain group]  (integer)
+2
+#
+#
+# Process Conditions
+# ==================
+#
+# Temperature
+# -----------
+# Type of temperature trend?
+# Options:   linear     linear_from_file     profiles_from_file
+linear
+# Number of connecting points?    (integer)
+0           
+# Initial temperature at the bottom?  (real)  [K]
+1000.100000000  
+# Temperature gradient in z-direction?  [K/cm]
+0.000000000000  
+# Cooling rate? [K/s]
+0.000000000000  
+#
+# Moving frame
+# ------------
+# Moving-frame system in z-direction?
+# Options:      moving_frame      no_moving_frame
+no_moving_frame
+
+# Nucleation
+# ==========
+# Enable further nucleation?
+# Options:  nucleation   nucleation_symm   no_nucleation  [verbose|no_verbose]
+no_nucleation
+
+# Output
+# ======
+#
+# Output times
+# ------------
+# Finish input of output times (in seconds) with 'end_of_simulation'
+# 'regularly-spaced' outputs can be set with 'linear_step'
+# or 'logarithmic_step' and then specifying the increment
+# and end value
+# ('automatic_outputs' optionally followed by the number
+#  of outputs can be used in conjunction with 'linear_from_file')
+#  'first'                  : additional output for first time-step
+#  'end_at_temperature' <temp>     : additional output and end of simulation
+#                                    at given temperature
+#  'end_at_fraction' <phase><frac> : additional output and end of simulation
+#                                    at given phase fraction
+#  'suppress_at_full' <phase>      : no field output for phase fraction of 100%
+#
+linear_step 0.00625 0.25
+end_of_simulation
+# Number of intermediate outputs = 40
+#
+# Output files
+# ------------
+# Selection of the outputs
+# [legacy|verbose|terse]
+# Finish selection of outputs with 'end_of_outputs'.
+terse
+out_fraction 0 1 2
+tab_fractions
+tab_log
+end_of_outputs
+#
+#
+# Numerical parameters
+# ====================
+#
+# Phase field solver
+# ------------------
+# Time-step ?
+# Options:   fix ...[s]   automatic    automatic_limited
+automatic_limited
+# Options:   constant      from_file
+constant
+# Limits: (real) min./s, [max./s], [time step factor], [segregation factor]
+0. 1000.
+#Coefficient for phase-field criterion 1.00
+#Number of steps to adjust profiles of initially sharp interfaces [exclude_inactive]?
+0
+# Type of potential?
+# Options:  double_obstacle  multi_obstacle   [no_fd_correction | fd_correction]
+# Recommended: multi_obstacle fd_correction
+multi_obstacle  fd_correction
+# Phase minimum?
+1.00E-04
+# Interface thickness (in cells)?
+8.000000000000  
+# Coefficient for initial dimension of field iFace
+#  [minimum usage] [target usage]
+0.30
+# Coefficient for initial dimension of field nTupel
+#  [minimum usage] [target usage]
+0.01
+#
+# Parallel Execution
+# ==================
+# Number of parallel threads ?
+2
+
+
+Beginning of initialisation
+===========================
+Routine init calls routine initDateien
+Routine init calls routine initParallel
+Routine init calls routine initRand
+Routine init calls routine initWorkspace
+Routine init calls routine initPointer
+Routine init calls routine initIFaceSharp
+# Grain number 1 set
+# Grain number 2 set
+Routine init calls routine initKorn
+Routine init calls routine initEinschwing
+Routine init calls routine initTwidth
+
+tWidth_max( PHASE_0: PHASE_1) = 5.9375000E-06 s
+tWidth_max( PHASE_0: PHASE_2) = 5.9375000E-06 s
+tWidth_max( PHASE_1: PHASE_2) = 5.9375000E-06 s
+Maximal value for tWidth = 5.9375000E-06 s for phase-field solver
+Initial value for tWidth = 5.93750E-06 s for automatic time stepping (phase-field solver)
+
+Remaining license time: permanent
+
+==================================================
+
+Time t = 0.0000000 s
+CPU-time: 0 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 6.25000E-03 s
+CPU-time: 6 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 1.25000E-02 s
+CPU-time: 6 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 1.87500E-02 s
+CPU-time: 6 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 2.50000E-02 s
+CPU-time: 6 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 3.12500E-02 s
+CPU-time: 6 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 3.75000E-02 s
+CPU-time: 6 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 4.37500E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 5.00000E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 5.62500E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 6.25000E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 6.87500E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 7.50000E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 8.12500E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 8.75000E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 9.37500E-02 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.10000 s
+CPU-time: 5 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.10625 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.11250 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.11875 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.12500 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.13125 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.13750 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.14375 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.15000 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.15625 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.16250 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.16875 s
+CPU-time: 4 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.17500 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.18125 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.18750 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.19375 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.20000 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.20625 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.21250 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.21875 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.22500 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.23125 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.23750 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.24375 s
+CPU-time: 3 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+Intermediate output for t = 0.25000 s
+CPU-time: 2 s
+Current phase-field solver time step = 5.94E-06 s
+Temperature at the bottom = 1000.1 K
+Temperature gradient = 0.00000 K/cm
+
+==================================================
+
+Simulation run on machine: n009
+Remaining license time: permanent
+CPU time in seconds:  190
+Wall clock time in seconds:  100
+End
+
