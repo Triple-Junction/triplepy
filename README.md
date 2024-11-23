@@ -2,10 +2,11 @@
 
 ## Description
 This repo contains the post-processing code for the corresponding publication
-_**"Triple junction benchmark for grain-boundary migration combining capillary and bulk driving forces"**_ (add doi once existing).
+_**"Triple junction benchmark for grain-boundary migration combining capillary and bulk driving forces"**_
+[DOI: 10.1088/1361-651X/ad8d6f](https://doi.org/10.1088/1361-651X/ad8d6f)
 
 ## Installation
-Run `pip install .` for installation.
+Run `pip install git+https://github.com/triple-junction/triplepy.git#egg=triplepy` for installation.
 
 ## Computing sharp-interface steady-state solutions
 Given a triple junction slope `<tj-slope>` and a dimensionless driving force `<dimensionless-driving-force>`, sharp interface solutions can be computed as follows:
