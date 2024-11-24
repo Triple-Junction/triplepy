@@ -20,6 +20,9 @@ classifiers = [
 ]
 dependencies = ["numpy", "scipy", "scikit-image", "vtk", "pint", "mip"]
 
+[project.optional-dependencies]
+test = ["pytest"]
+
 [project.urls]
 Homepage = "https://github.com/Triple-Junction/triplepy"
 Issues = "https://github.com/Triple-Junction/triplepy/issues"
