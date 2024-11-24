@@ -6,7 +6,9 @@ _**"Triple junction benchmark for multiphase-field models combining capillary an
 [DOI: 10.1088/1361-651X/ad8d6f](https://doi.org/10.1088/1361-651X/ad8d6f)
 
 ## Installation
-Run `pip install git+https://github.com/triple-junction/triplepy.git#egg=triplepy` for installation.
+Run `pip install triplepy` to install latest release.
+
+Run `pip install git+https://github.com/triple-junction/triplepy.git#egg=triplepy` for installation of latest commit on `main`.
 
 ## Computing sharp-interface steady-state solutions
 Given a triple junction slope `<tj-slope>` and a dimensionless driving force `<dimensionless-driving-force>`, sharp interface solutions can be computed as follows:
