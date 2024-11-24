@@ -2,7 +2,7 @@
 
 ## Description
 This repo contains the post-processing code for the corresponding publication
-_**"Triple junction benchmark for grain-boundary migration combining capillary and bulk driving forces"**_
+_**"Triple junction benchmark for multiphase-field models combining capillary and bulk driving forces"**_
 [DOI: 10.1088/1361-651X/ad8d6f](https://doi.org/10.1088/1361-651X/ad8d6f)
 
 ## Installation
