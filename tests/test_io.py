@@ -1,10 +1,10 @@
-import pytest
-import numpy as np
 import os
 
-import triplepy.vtk_io as vtk
-import triplepy.postprocessing as pp
+import numpy as np
+import pytest
 
+import triplepy.postprocessing as pp
+import triplepy.vtk_io as vtk
 from triplepy.set_input_parameters import load_sim_params_from_json
 
 

@@ -1,4 +1,5 @@
 import numpy as np
+
 import triplepy.sharp_interface_solution as analytic
 from triplepy.numerical_evaluation import write_dict_to_csv
 
@@ -8,9 +9,9 @@ ratios = analytic.calculate_gb_energy_ratio_from_dihedral_angle(np.deg2rad(angle
 
 for i, m in enumerate(slopes):
     # Compute slope from Young's law
-    print("Dihedral angle = %.6g" % angles_deg[i])
-    print("TJ slope = %.6g" % m)
-    print("Energy ratio = %.6g" % ratios[i])
+    print(f"Dihedral angle = {angles_deg[i]:.6g}")
+    print(f"TJ slope = {m:.6g}")
+    print(f"Energy ratio = {ratios[i]:.6g}")
 
     # Compute non-dimensional driving force
     p = np.linspace(-10, 10, num=501)
@@ -20,5 +21,5 @@ for i, m in enumerate(slopes):
     v_analytic = gb.calculate_velocity(p)
 
     result_dict = {"dimless_drivingforce": p, "v_analytic": v_analytic, "sqrt1m2_p": np.sqrt(1.0 + m*m) * p}
-    write_dict_to_csv(result_dict, "v_analytic_theta%.10g.csv" % angles_deg[i])
+    write_dict_to_csv(result_dict, f"v_analytic_theta{angles_deg[i]:.10g}.csv")
     print("------------------------")

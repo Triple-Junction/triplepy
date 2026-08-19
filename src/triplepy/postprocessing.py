@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import numpy as np
 
 import triplepy.numerical_evaluation as numerics
@@ -50,7 +52,7 @@ def calc_analytic_velocity_nondimensional(m, p):
 
 
 def calc_dimless_velocity_in_frames(
-    simdata, first_frame: int = 1, last_frame: int = None
+    simdata, first_frame: int = 1, last_frame: int | None = None
 ):
     v_left = []
     v_right = []
@@ -91,7 +93,7 @@ def calc_analytic_grain_boundary(m, p):
 
 
 def calc_simulated_gb_profiles_in_frames(
-    simdata, first_frame: int = 1, last_frame: int = None
+    simdata, first_frame: int = 1, last_frame: int | None = None
 ):
     if last_frame is None:
         last_frame = simdata["phia"].shape[0] - 1
@@ -130,8 +132,8 @@ def calc_simulated_gb_profiles_in_frames(
             GB_y_analytic_interp = np.interp(GB_x_sim, GB_x_analytic, GB_y_analytic)
             diff2 = (GB_y_sim - GB_y_analytic_interp) ** 2
             GB_sim["L2"] = np.sqrt(
-                np.trapz(diff2, x=GB_x_sim)
-                / np.trapz(GB_y_analytic_interp**2, x=GB_x_sim)
+                np.trapezoid(diff2, x=GB_x_sim)
+                / np.trapezoid(GB_y_analytic_interp**2, x=GB_x_sim)
             )
         else:
             GB_y_analytic_interp = np.nan
@@ -143,8 +145,8 @@ def calc_simulated_gb_profiles_in_frames(
 
 def postprocess_simulation(
     simdata,
-    first_frame: int = None,
-    last_frame: int = None,
+    first_frame: int | None = None,
+    last_frame: int | None = None,
     display_message: bool = True,
 ):
     """

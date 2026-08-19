@@ -1,10 +1,12 @@
+import json
 import os
+import warnings
+from xml.dom import minidom
+
+import numpy as np
 import vtk
 from vtk.util.numpy_support import vtk_to_numpy
-import json
-from xml.dom import minidom
-import numpy as np
-import warnings
+
 from triplepy.set_input_parameters import load_sim_params_from_json
 
 
@@ -59,7 +61,7 @@ def read_vtk_field_data(filename):
 
 
 def read_vtk_file(filename):
-    print("Reading file \"%s\"" % filename)
+    print(f'Reading file "{filename}"')
     result_dict = {}
     header_dict = read_vtk_header(filename)
     fields_dict = read_vtk_field_data(filename)
@@ -97,16 +99,16 @@ def read_pvd_time_series(pvd_filename):
     frames = {"time": [], "data": []}
     for dataset in datasets:
         if not dataset.hasAttribute("timestep"):
-            raise IOError("File \"%s\" has a missing timestep" % pvd_filename)
+            raise OSError(f'File "{pvd_filename}" has a missing timestep')
 
         if not dataset.hasAttribute("file"):
-            raise IOError("File \"%s\" has a missing file" % pvd_filename)
+            raise OSError(f'File "{pvd_filename}" has a missing file')
 
         if not dataset.hasAttribute("part"):
-            raise IOError("File \"%s\" has a missing part" % pvd_filename)
+            raise OSError(f'File "{pvd_filename}" has a missing part')
 
         if int(dataset.getAttribute("part")) != 0:
-            raise IOError("Only a single part supported in pvd file")
+            raise OSError("Only a single part supported in pvd file")
 
         filename = dataset.getAttribute("file")
         if not os.path.isabs(filename):
@@ -125,7 +127,7 @@ def read_time_series(filename):
     elif filename.endswith(".pvd"):
         return read_pvd_time_series(filename)
     else:
-        raise IOError("Unknown file format of file %s" % filename)
+        raise OSError(f"Unknown file format of file {filename}")
 
 
 def extract_field_data(vtk_data):
@@ -142,9 +144,9 @@ def extract_field_data(vtk_data):
 
     for data in vtk_data:
         if not np.allclose(data["origin"], origin_pointdata):
-            raise IOError("Inconsistent origins within file series")
+            raise OSError("Inconsistent origins within file series")
         if not np.allclose(data["spacing"], spacing):
-            raise IOError("Inconsistent spacings within file series")
+            raise OSError("Inconsistent spacings within file series")
 
         for point_data, array in data["point_data"].items():
             out_data[point_data]["data"].append(array)
@@ -158,7 +160,7 @@ def extract_field_data(vtk_data):
 def get_first_field(field_data):
     if len(list(field_data.keys())) > 1:
         warnings.warn("Results ambiguous since multiple fields inside vtk file")
-    return field_data[list(field_data.keys())[0]]
+    return field_data[next(iter(field_data))]
 
 
 def import_vtkdata(phia_vtk, phib_vtk, phic_vtk):
@@ -173,15 +175,15 @@ def import_vtkdata(phia_vtk, phib_vtk, phic_vtk):
     for phase, filename in vtks.items():
         time_series = read_time_series(filename)
         if not np.allclose(time_series["time"], vtkdata["time"]):
-            raise IOError("Inconsistent times among phases")
+            raise OSError("Inconsistent times among phases")
 
         field = get_first_field(extract_field_data(time_series["data"]))
 
         if not np.allclose(field["origin"], origin):
-            raise IOError("Inconsistent origins among phases")
+            raise OSError("Inconsistent origins among phases")
 
         if not np.allclose(field["spacing"], spacing):
-            raise IOError("Inconsistent spacings among phases")
+            raise OSError("Inconsistent spacings among phases")
 
         vtkdata[phase] = field["data"]
 

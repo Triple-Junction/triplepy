@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+
 import triplepy.sharp_interface_solution as si
 from triplepy.numerical_evaluation import write_dict_to_csv
 
@@ -14,9 +15,9 @@ fig, ax1 = plt.subplots()
 for p in driving_forces:
     solver = si.GB_GeometrySolver(m, p)
     geometry = solver.calc_dimensionless_geometry(kind="double", relative_l2_tolerance=1e-8)
-    key = "y_p%s" % (str(p))
+    key = f"y_p{p}"
     result_dict[key] = np.interp(result_dict["x"], geometry["x"], geometry["y"])
-    ax1.plot(result_dict["x"], result_dict[key], "-", label="p = %.3f" % (p), lw=0.25)
+    ax1.plot(result_dict["x"], result_dict[key], "-", label=f"p = {p:.3f}", lw=0.25)
 
 
 ax1.set_aspect(1)
@@ -25,6 +26,6 @@ ax1.set_ylim(ax1.get_ylim()[0], 0.0)
 ax1.set_xlabel("x")
 ax1.set_ylabel("y")
 plt.legend(loc="lower center", bbox_to_anchor=(0.5, 1.1), ncol=4)
-plt.savefig("plot_geometries_theta_%g.pdf" % angle_deg, bbox_inches="tight")
+plt.savefig(f"plot_geometries_theta_{angle_deg:g}.pdf", bbox_inches="tight")
 
-write_dict_to_csv(result_dict, "analytical_geometries_theta_%g.csv" % angle_deg)
+write_dict_to_csv(result_dict, f"analytical_geometries_theta_{angle_deg:g}.csv")

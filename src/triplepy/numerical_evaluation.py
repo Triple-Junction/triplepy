@@ -1,14 +1,15 @@
+import csv
+import warnings
+
 import numpy as np
 from skimage import measure
-import warnings
-import csv
 
 
 # limiting the precision to 10 digits seems reasonable
 # we do this in order to get rid of double-precision artifacts
 def _formatter(x):
     if isinstance(x, float):
-        return "%.10g" % x
+        return f"{x:.10g}"
     return x
 
 
@@ -33,7 +34,7 @@ def write_dict_to_csv(dictionary: dict, filename: str, delimiter: str = ",") -> 
         writer = csv.DictWriter(csvfile, fieldnames=[key for key in dictionary], delimiter=delimiter)
         writer.writeheader()
         # use the formatter to convert floating point numbers into a string
-        for i in range(len(dictionary[list(dictionary.keys())[0]])):
+        for i in range(len(dictionary[next(iter(dictionary))])):
             writer.writerow({key: _formatter(dictionary[key][i]) for key in dictionary})
 
 
@@ -290,7 +291,7 @@ def calculate_velocity_nondimensional(simdata: dict, frame1: int, frame2: int):
     fraction_c = []
 
     for frame in [frame1, frame2]:
-        iso_ab, iso_ac, iso_bc = extract_isolines(simdata, frame)
+        _, iso_ac, iso_bc = extract_isolines(simdata, frame)
 
         # Check if some isolines are empty sets
         if iso_ac.size != 0:
@@ -357,7 +358,7 @@ def extract_grainboundary_profile(simdata: dict, frame: int):
         dx = float(simdata["grid"]["delta_x"] / simdata["input_params"]["width"])
 
         # Compute triple point position
-        tp_x, tp_y = calc_intersection(iso_ac[0], iso_ac[1], iso_bc[0], iso_bc[1])
+        tp_x, _ = calc_intersection(iso_ac[0], iso_ac[1], iso_bc[0], iso_bc[1])
         # Check if isolines intersect or yield empty set
         if tp_x.size == 0:
             warnings.warn("Triple point is ill-defined!")

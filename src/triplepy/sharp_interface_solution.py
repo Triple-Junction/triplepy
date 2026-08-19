@@ -1,6 +1,7 @@
+import warnings
+
 import numpy as np
 from scipy import optimize
-import warnings
 
 
 def calculate_slope(gb_energy_moving, gb_energy_stationary):
@@ -31,7 +32,7 @@ def isclose(a, b):
 def calc_l2_norm_rel_error(x_coarse, f_coarse, x_fine, f_fine):
     f_coarse_on_fine = np.interp(x_fine, x_coarse, f_coarse)
     diff2 = (f_coarse_on_fine - f_fine)*(f_coarse_on_fine - f_fine)
-    return np.sqrt(np.trapz(diff2, x=x_fine) / np.trapz(np.array(f_fine)*np.array(f_fine), x=x_fine))
+    return np.sqrt(np.trapezoid(diff2, x=x_fine) / np.trapezoid(np.array(f_fine)*np.array(f_fine), x=x_fine))
 
 
 def integrate_trapezoidal(y0, x, slopes):
@@ -65,11 +66,11 @@ class GB_VelocityCalculator:
         # we should have the following order p_crit_neg1_m2 < p_crit_neg1 < p_stat
         # p_crit_neg1 should always be lower than p_stat
         if self.p_crit_neg1 > self.p_stat:
-            raise ValueError("The dimensional driving force for stationary GB (p_stat=%f) is larger than the one with q = -1 (p_neg1=%f)" % (self.p_stat, self.p_crit_neg1))
+            raise ValueError(f"The dimensional driving force for stationary GB (p_stat={self.p_stat:f}) is larger than the one with q = -1 (p_neg1={self.p_crit_neg1:f})")
 
         # p_crit_neg1_m2 should always be lower than p_crit_neg1
         if self.p_crit_neg1_m2 > self.p_crit_neg1:
-            raise ValueError("The dimensional driving force for q=-1 (p_neg1=%f) is larger than the one with q=-sqrt(1+m^2) (p_neg1_m2=%f)" % (self.p_crit_neg1, self.p_crit_neg1_m2))
+            raise ValueError(f"The dimensional driving force for q=-1 (p_neg1={self.p_crit_neg1:f}) is larger than the one with q=-sqrt(1+m^2) (p_neg1_m2={self.p_crit_neg1_m2:f})")
 
         self.__run_tests()
 
@@ -82,11 +83,11 @@ class GB_VelocityCalculator:
 
     def __test_velocity_neg1(self):
         if not isclose(self.calculate_velocity(self.p_crit_neg1), -self.p_crit_neg1):
-            raise ValueError("The velocity for q=-1 (p_neg1=%f) is not identical to -p_neg1." % (self.p_crit_neg1))
+            raise ValueError(f"The velocity for q=-1 (p_neg1={self.p_crit_neg1:f}) is not identical to -p_neg1.")
 
     def __test_velocity_neg1_m2(self):
         if not isclose(self.calculate_velocity(self.p_crit_neg1_m2), self.v_crit_neg1_m2):
-            raise ValueError("The velocity for q=-sqrt(1+m^2) (p_neg1_m2=%f) is not identical to -sqrt(1+m^2)*p_neg1_m2." % (self.p_crit_neg1_m2))
+            raise ValueError(f"The velocity for q=-sqrt(1+m^2) (p_neg1_m2={self.p_crit_neg1_m2:f}) is not identical to -sqrt(1+m^2)*p_neg1_m2.")
 
     def __calculate_velocity_lower_bound(self, p):
         # return lower bounds with decreasing order of p
@@ -152,7 +153,7 @@ class GB_VelocityCalculator:
         return root
 
     def calculate_velocity(self, p):
-        if (isinstance(p, float) or isinstance(p, int)):
+        if isinstance(p, (float, int)):
             return self.__solve_single_velocity(p)
 
         res = []
@@ -226,9 +227,9 @@ class GB_GeometrySolver:
             slopes = slopes_fine
 
         if error <= relative_l2_tolerance:
-            print("Solution of GB geometry converged with L2 error = %.1e after %d refinements" % (error, it))
+            print(f"Solution of GB geometry converged with L2 error = {error:.1e} after {it:d} refinements")
         else:
-            warnings.warn("Solution did not converge! L2 error = %.1e" % error)
+            warnings.warn(f"Solution did not converge! L2 error = {error:.1e}")
 
         # produce appropriate output for "kind"
         if kind == "half":
@@ -246,4 +247,4 @@ class GB_GeometrySolver:
                     "derivative": np.concatenate((slopes_fine, -np.flip(slopes_fine[:-1])))
                     }
         else:
-            raise ValueError("Unknown kind \"%s\"" % kind)
+            raise ValueError(f'Unknown kind "{kind}"')
