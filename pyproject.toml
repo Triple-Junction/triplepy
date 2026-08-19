@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "triplepy"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
   { name="Paul Hoffrogge", email="mail@paul-hoffrogge.de" },
   { name="Simon Daubner", email="simon.daubner@kit.edu" },
