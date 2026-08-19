@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+
 import triplepy.sharp_interface_solution as si
 from triplepy.numerical_evaluation import write_dict_to_csv
 
@@ -15,9 +16,9 @@ for i, m in enumerate(slopes):
     for p in driving_forces:
         solver = si.GB_GeometrySolver(m, p)
         geometry = solver.calc_dimensionless_geometry(kind="double", relative_l2_tolerance=1e-8)
-        key = "y_theta_%s_p%s" % (str(angles_deg[i]), str(p))
+        key = f"y_theta_{angles_deg[i]}_p{p}"
         result_dict[key] = np.interp(result_dict["x"], geometry["x"], geometry["y"])
-        ax1.plot(result_dict["x"], result_dict[key], "-", label="p = %.3f, theta = %f" % (p, angles_deg[i]), lw=0.25)
+        ax1.plot(result_dict["x"], result_dict[key], "-", label=f"p = {p:.3f}, theta = {angles_deg[i]:f}", lw=0.25)
 
 
 ax1.set_aspect(1)

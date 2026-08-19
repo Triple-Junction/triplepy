@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider
 import numpy as np
+from matplotlib.widgets import Slider
 
 
 def plotField2D(field, title, dpi=100):
@@ -64,7 +64,6 @@ def plotTriplePoint(phia, phib, phic, dpi=200, grid=-1):
 
 
 def plotInteractiveTriplePoint(phia, phib, phic, dpi=200, m=1, f=1):
-    global iso_ab
     [nx, ny] = phia[0].shape
 
     # Create the initial plot

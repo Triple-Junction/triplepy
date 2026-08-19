@@ -1,6 +1,8 @@
 import json
-from triplepy import ureg, Quantity
+
 from pint import PintError
+
+from triplepy import Quantity, ureg
 from triplepy.postprocessing import calc_p, calc_p_pf
 
 
